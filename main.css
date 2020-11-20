@@ -1,0 +1,43 @@
+body {
+  background-color: #333;
+  font-family: 'Roboto', sans-serif;
+}
+
+.calculator {
+  margin: 10vh auto;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #b3b3b3;
+  width: 350px;
+  height: 500px;
+  box-shadow: 0px 0px 10px 3px #1a1a1a;
+}
+
+.display {
+  margin: 5px;
+  padding: 5px;
+}
+
+.display p {
+  text-align: right;
+  color: white;
+  height: 1.5em;
+}
+
+.top {
+  font-size: 16px;
+  margin: 0px 0px 10px;
+}
+
+.bottom {
+  font-size: 36px;
+  margin: 0px;
+}
+
+.buttons {
+  margin: 0px 5px 5px;
+  flex-grow: 1;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 5px;
+}
