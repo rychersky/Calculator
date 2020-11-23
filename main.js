@@ -40,6 +40,7 @@ bMultiply.addEventListener('click', () => operClick('*'));
 bDivide.addEventListener('click', () => operClick('/'));
 bEquals.addEventListener('click', equals);
 bBack.addEventListener('click', back);
+dec.addEventListener('click', decimal);
 
 bC.addEventListener('click', () => {
   botText.length = 0;
@@ -53,18 +54,12 @@ bCE.addEventListener('click', () => {
   dBottom.textContent = '';
 });
 
-dec.addEventListener('click', () => {
-  if (!botText.includes('.')) {
-    botText.push('.');
-    dBottom.textContent = botText.join('');
-  }
-});
-
 document.addEventListener('keydown', event => {
   if (/^[0-9]$/.test(event.key)) numClick(event.key);
   else if (/[-+*\/]/.test(event.key)) operClick(event.key);
   else if (event.key === 'Backspace') back();
   else if (event.key === 'Enter') equals();
+  else if (event.key === '.') decimal();
 });
 
 function add(n1, n2) {return n1+n2};
@@ -75,6 +70,13 @@ function divide(n1, n2) {return n1/n2};
 function back() {
   botText.pop();
   dBottom.textContent = botText.join('');
+}
+
+function decimal() {
+  if (!botText.includes('.')) {
+    botText.push('.');
+    dBottom.textContent = botText.join('');
+  }
 }
 
 function equals() {
@@ -90,7 +92,7 @@ function equals() {
     topText.length = 0;
     dTop.textContent = '';
     botText.length = 0;
-    botText.push(answer)
+    [...answer].forEach(digit => botText.push(digit));
     dBottom.textContent = answer;
   }
 }

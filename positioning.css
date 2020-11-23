@@ -1,3 +1,4 @@
+/* Row 1 */
 .ce {
   grid-column-start: 1;
   grid-column-end: 2;
@@ -26,11 +27,55 @@
   grid-row-end: 2;
 }
 
+/* Row 2 */
+.n7 {
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 2;
+  grid-row-end: 3;
+}
+
+.n8 {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 2;
+  grid-row-end: 3;
+}
+
+.n9 {
+  grid-column-start: 3;
+  grid-column-end: 4;
+  grid-row-start: 2;
+  grid-row-end: 3;
+}
+
 .multiply {
   grid-column-start: 4;
   grid-column-end: 5;
   grid-row-start: 2;
   grid-row-end: 3;
+}
+
+/* Row 3 */
+.n4 {
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 3;
+  grid-row-end: 4;
+}
+
+.n5  {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 3;
+  grid-row-end: 4;
+}
+
+.n6 {
+  grid-column-start: 3;
+  grid-column-end: 4;
+  grid-row-start: 3;
+  grid-row-end: 4;
 }
 
 .subtract {
@@ -40,6 +85,7 @@
   grid-row-end: 4;
 }
 
+/* Row 4 */
 .add {
   grid-column-start: 4;
   grid-column-end: 5;
@@ -47,6 +93,7 @@
   grid-row-end: 5;
 }
 
+/* Row 5 */
 .n0 {
   grid-column-start: 1;
   grid-column-end: 3;
