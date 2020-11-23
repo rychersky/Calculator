@@ -1,5 +1,4 @@
 'use strict';
-
 const dTop = document.querySelector('.top');
 const dBottom = document.querySelector('.bottom');
 const b1 = document.querySelector('.n1');
@@ -12,13 +11,15 @@ const b7 = document.querySelector('.n7');
 const b8 = document.querySelector('.n8');
 const b9 = document.querySelector('.n9');
 const b0 = document.querySelector('.n0');
+const dec = document.querySelector('.decimal');
 const bAdd = document.querySelector('.add');
 const bSubtract = document.querySelector('.subtract');
 const bMultiply = document.querySelector('.multiply');
-const dDivide = document.querySelector('.divide');
+const bDivide = document.querySelector('.divide');
 const bEquals = document.querySelector('.equals');
 const bC = document.querySelector('.c');
 const bCE = document.querySelector('.ce');
+const bBack = document.querySelector('.back');
 
 const botText = [];
 const topText = [];
@@ -33,8 +34,12 @@ b7.addEventListener('click', () => numClick('7'));
 b8.addEventListener('click', () => numClick('8'));
 b9.addEventListener('click', () => numClick('9'));
 b0.addEventListener('click', () => numClick('0'));
-
 bAdd.addEventListener('click', () => operClick('+'));
+bSubtract.addEventListener('click', () => operClick('-'));
+bMultiply.addEventListener('click', () => operClick('*'));
+bDivide.addEventListener('click', () => operClick('/'));
+bEquals.addEventListener('click', equals);
+bBack.addEventListener('click', back);
 
 bC.addEventListener('click', () => {
   botText.length = 0;
@@ -44,8 +49,22 @@ bC.addEventListener('click', () => {
 });
 
 bCE.addEventListener('click', () => {
-  botText.textContent = 0;
+  botText.length = 0;
   dBottom.textContent = '';
+});
+
+dec.addEventListener('click', () => {
+  if (!botText.includes('.')) {
+    botText.push('.');
+    dBottom.textContent = botText.join('');
+  }
+});
+
+document.addEventListener('keydown', event => {
+  if (/^[0-9]$/.test(event.key)) numClick(event.key);
+  else if (/[-+*\/]/.test(event.key)) operClick(event.key);
+  else if (event.key === 'Backspace') back();
+  else if (event.key === 'Enter') equals();
 });
 
 function add(n1, n2) {return n1+n2};
@@ -53,12 +72,26 @@ function subtract(n1, n2) {return n1-n2};
 function multiply(n1, n2) {return n1*n2};
 function divide(n1, n2) {return n1/n2};
 
-function operate(n1, operator, n2) {
-  switch(operator) {
-    case '+': return add(n1, n2);
-    case '-': return add(n1, n2);
-    case '*': return multiply(n1, n2);
-    case '/': return divide(n1, n2);
+function back() {
+  botText.pop();
+  dBottom.textContent = botText.join('');
+}
+
+function equals() {
+  if (topText[1] === '/' && botText.length > 0 && +botText.join('') === 0) {
+    alert('You cannot divide by zero. Please change your input.')
+    botText.length = 0;
+    dBottom.textContent = '';
+    return;
+  }
+
+  if (topText.length === 2 && botText.length > 0) {
+    const answer = operate(+topText[0], topText[1], +botText.join('')).toString();
+    topText.length = 0;
+    dTop.textContent = '';
+    botText.length = 0;
+    botText.push(answer)
+    dBottom.textContent = answer;
   }
 }
 
@@ -67,8 +100,41 @@ function numClick(input) {
   dBottom.textContent = botText.join('');
 }
 
+function operate(n1, operator, n2) {
+  switch(operator) {
+    case '+': return add(n1, n2);
+    case '-': return subtract(n1, n2);
+    case '*': return multiply(n1, n2);
+    case '/': return divide(n1, n2);
+  }
+}
+
 function operClick(oper) {
-  if (botText.length > 0) {
-    
+  if (topText[1] === '/' && botText.length > 0 && +botText.join('') === 0) {
+    alert('You cannot divide by zero. Please change your input.')
+    botText.length = 0;
+    dBottom.textContent = '';
+    return;
+  }
+  
+  if (botText.length > 0 && topText.length === 0) {
+    topText.push(botText.join(''));
+    topText.push(oper);
+    dTop.textContent = topText.join(' ');
+    botText.length = 0;
+    dBottom.textContent = '';
+  } 
+  else if (botText.length === 0 && topText.length > 0) {
+    topText[1] = oper;
+    dTop.textContent = topText.join(' ');
+  } 
+  else if (botText.length > 0 && topText.length === 2) {
+    const answer = operate(+topText[0], topText[1], +botText.join('')).toString();
+    topText.length = 0;
+    topText.push(answer);
+    topText.push(oper);
+    dTop.textContent = topText.join(' ');
+    botText.length = 0;
+    dBottom.textContent = '';
   }
 }

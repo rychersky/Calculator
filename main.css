@@ -1,9 +1,10 @@
 body {
-  background-color: #333;
+  background-color: #808080;
   font-family: 'Roboto', sans-serif;
 }
 
 .calculator {
+  background-color: #404040;
   margin: 10vh auto;
   display: flex;
   flex-direction: column;
@@ -20,8 +21,8 @@ body {
 
 .display p {
   text-align: right;
-  color: white;
   height: 1.5em;
+  color: white;
 }
 
 .top {
@@ -41,3 +42,24 @@ body {
   grid-template-columns: repeat(4, 1fr);
   gap: 5px;
 }
+
+button {
+  color: white;
+  background-color: #262626;
+  border: none;
+  font-size: 18px;
+}
+
+button.number {
+  background-color: #1a1a1a;
+}
+
+button:hover {
+  background-color: #666666;
+  cursor: pointer;
+}
+
+button:active {
+  background-color: #737373;
+}
+
